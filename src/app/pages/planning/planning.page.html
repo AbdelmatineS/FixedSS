@@ -1,0 +1,240 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Calendrier
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button expand="block" (click)="setToday()">
+        Today
+    </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+<ion-segment [(ngModel)]="calendar.mode">
+  <ion-segment-button value="month">Month</ion-segment-button>
+  <ion-segment-button value="week">Week</ion-segment-button>
+  <ion-segment-button value="day">Day</ion-segment-button>
+
+  </ion-segment>
+
+  <ion-row  class="ion-justify-content-center">
+    <ion-col size="3">
+      <ion-button fill="clear" (click)="calendarBack()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <h2 class="ion-text-center">
+          {{viewTitle}}
+      </h2>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button fill="clear" (click)="calendarForward()">
+        <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+
+
+<calendar 
+[eventSource]="eventSource"
+[startingDayMonth]="1"
+[startingDayWeek]="1"
+[calendarMode]="calendar.mode"
+[startHour]="8"
+[endHour]="18"
+[autoSelect]="false"
+(onEventSelected)="onEventSelected($event)"
+(onTimeSelected)="onTimeSelected($event)"
+[monthviewDisplayEventTemplate]="template"
+[weekviewAllDayEventTemplate]="weekviewAllDayEventTemplate"
+(onTitleChanged)="viewTitle = $event">
+
+</calendar>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button id="inputmodal">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-modal 
+#modal trigger="inputmodal"
+[presentingElement]="presentingElement">
+  <ng-template>
+    <ion-header class="ion-no-border">
+      <ion-toolbar color="light">
+        <ion-buttons slot="start">
+          <ion-button (click)="modal.dismiss()"> Annuler </ion-button>
+        </ion-buttons>
+        <ion-title>New event</ion-title>
+        <ion-buttons slot="end">
+          <ion-button
+          color="primary"
+          strong 
+          [disabled]="!newEvent.title"
+          (click)="scheduleEvent()"> Ajouter </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding modal" >
+
+      <div class="group">
+        <ion-input
+        type="text"
+        [(ngModel)]="newEvent.title" placeholder="Title"
+        >
+
+        </ion-input>
+      </div>
+
+      <div class="group">
+        <ion-item>
+
+          <ion-toggle
+          [(ngModel)]="newEvent.allDay">
+          All Day
+          </ion-toggle>
+        </ion-item>
+
+        <ion-item (click)="showStart = !showStart">
+          <ion-label>Starts</ion-label>
+          <ion-text slot="end">{{ formatedStart }}</ion-text>
+        </ion-item>
+        <ion-datetime 
+        #start 
+        *ngIf="showStart"
+        [value]="newEvent.startTime"
+        (ionChange)="startChanged(start.value)"
+        [presentation]="newEvent.allDay ? 'date' : 'time-date'"
+        hourCycle="h24"
+        >
+        </ion-datetime>
+
+        <ng-container *ngIf="!newEvent.allDay">
+          <ion-item (click)="showEnd = !showEnd">
+            <ion-label>Ends</ion-label>
+            <ion-text slot="end">{{ formatedEnd }}</ion-text>
+          </ion-item>
+          <ion-datetime 
+          #end 
+          [value]="newEvent.endTime"
+          *ngIf="showEnd"
+          (ionChange)="endChanged(end.value)"
+          [presentation]="newEvent.allDay ? 'date' : 'time-date'"
+          hourCycle="h24"
+          >
+          
+          </ion-datetime>
+        </ng-container>
+
+
+      </div>
+
+
+
+    </ion-content>
+  </ng-template>
+
+</ion-modal>
+
+<ng-template #template let-view="view" let-row="row" let-col="col">
+  {{view.dates[row*7+col].label}}
+  <div class="indicator-container">
+    <div 
+    class="event-indicator" 
+    *ngFor="let e of view.dates[row*7+col].events">
+      *
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #weekviewAllDayEventTemplate let-displayEvent="displayEvent">
+  <div class="calendar-event-inner week-event" >{{displayEvent.event.title}}</div>
+</ng-template>
+
+</ion-content>
+
+<!--
+    <ion-button (click)="toggleBulkEdit()" expand="full">
+    Bulk Edit
+  </ion-button>
+  <ion-button (click)="bulkDelete()" expand="full" color="danger" *ngIf="bulkEdit">
+    Bulk Delete
+  </ion-button>
+
+  <ion-row class="header-row">
+    <ion-col size="2" *ngIf="bulkEdit">
+      Select
+    </ion-col>
+    <ion-col size="6" size-md="4" size-lg="2" tappable (click)="sortBy('email')">
+      Email
+
+    <ion-icon name="arrow-down" *ngIf="sortDirection == 1"></ion-icon>
+    <ion-icon name="arrow-up" *ngIf="sortDirection == 2"></ion-icon>
+    </ion-col>
+    <ion-col size="2" class="ion-hide-md-down">
+    login
+    </ion-col>
+    <ion-col size="2">
+    First Name
+    </ion-col>
+    <ion-col size="2">
+    Last Name
+    </ion-col>
+    <ion-col size="2" class="ion-hide-lg-down">
+    Phone
+    </ion-col>
+    <ion-col size="2" *ngIf="!bulkEdit">
+      Action
+    </ion-col>
+    </ion-row>
+
+
+    <ion-row *ngFor="let row of data.results; let i = index;" class="data-row">
+      <ion-col size="2" *ngIf="bulkEdit">
+
+      </ion-col>
+      <ion-col size="6" size-md="4" size-lg="2">
+        {{ row.email }}
+      </ion-col>
+
+      <ion-col size="2" class="ion-hide-md-down">
+      {{ row.login.username }}
+      </ion-col>
+      <ion-col size="2">
+        {{ row.name.first }}
+      </ion-col>
+      <ion-col size="2">
+        {{ row.name.last }}
+      </ion-col>
+      <ion-col size="2" class="ion-hide-lg-down">
+        {{ row.phone }}
+      </ion-col>
+      <ion-col size="2" *ngIf="!bulkEdit">
+
+        <ng-container *ngIf="row.registered.date">
+          {{ row.registered.date | date: 'dd-MM-yyyy' }}
+        </ng-container>
+        <ng-container *ngIf="!row.registered.date">
+          <ion-button 
+          size="small" 
+          (click)="changeDate(i)" 
+          color="light" 
+          fill="clear">
+        <ion-icon color="medium" name="calendar-sharp" slot="icon-only">
+        </ion-icon>
+        </ion-button>
+        </ng-container>
+
+
+      </ion-col>
+    </ion-row>
+-->

@@ -33,21 +33,21 @@ export class DemandePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getListDemande();
-  }
+/*     this.getListDemande();
+ */  }
 
 
   Search(){
 
   }
 
-  getListDemande(){
+/*   getListDemande(){
     this.stService.getAllDemandeinter().subscribe(data => {
       console.log(data);
       this.demandes = data;
     })
   }
-
+ */
   loadMore($event: Event) {
     throw new Error('Method not implemented.');
     }

@@ -13,7 +13,7 @@ export class SousTraitantService {
     headers: new HttpHeaders({'Content-Type': 'application/json'}),
   };
 
-  addDateDemandeinter(formData: any) {
+/*   addDateDemandeinter(formData: any) {
     return this.http.post(`${environment.baseApiUrl}/DemandeInter/addDateDemandeInter`, formData);
   }
 
@@ -24,6 +24,6 @@ export class SousTraitantService {
   searchDemandeinter(attribute: string, query: string) {
     const url = `${environment.baseApiUrl}/DemandeInter/search?attribute=${attribute}&query=${query}`;
     return this.http.get(url);
-  }
+  } */
 
 }

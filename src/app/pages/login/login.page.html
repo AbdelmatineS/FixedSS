@@ -1,0 +1,190 @@
+<ion-content [fullscreen]="true">
+
+  <div class="title-container">
+    <ion-img src="assets/images/logo.png"/>
+  </div>
+
+
+
+  <ion-text class="text-container" color="grey700">
+    Bienvenue à nouveau, vous nous avez manqué !
+  </ion-text>
+
+
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <ion-card>
+
+      <ng-container *ngIf="submissionType === 'join'">  
+        <ion-input 
+        #firstName="ngModel"
+        label="Nom et Prenom" 
+        label-placement="floating" 
+        fill="outline"
+          ngModel
+          type="text"
+          name="fullName"
+          errorText="le nom est obligatoire"
+          required>
+          
+      </ion-input>
+      </ng-container>
+
+      <ion-input 
+      label="Username" 
+      label-placement="floating" 
+      fill="outline"
+        #firstNameInput="ngModel"
+        ngModel
+        type="text"
+        name="username"
+        errorText="le nom d'utilisateur est obligatoire"
+
+        required>
+    </ion-input>
+
+
+
+
+
+      
+      <ng-container *ngIf="submissionType === 'join'">  
+        <ion-input 
+        #emailInput="ngModel"
+        label="Email" 
+        label-placement="floating" 
+        fill="outline"
+          ngModel
+          type="email"
+          name="email"
+          errorText="L'adresse email est obligatorie"
+          required>
+      </ion-input>
+
+      </ng-container>
+
+
+
+
+
+
+
+        <ion-input
+          label-placement="floating" 
+          label="mots de passe"
+          #passwordInput="ngModel"
+          ngModel
+          type="password"
+          name="password"
+          errorText="Le mots de passe est obligatoire"
+          fill="outline"
+          required
+          ></ion-input>
+
+          <ng-container *ngIf="submissionType === 'join'"> 
+              <div class="div">
+                <ion-input
+                label="confirmer mots de passe"
+                label-placement="floating" 
+                #confirmPasswordInput="ngModel"
+                ngModel
+                type="{{ showPassword ? 'text' : 'password' }}"
+                name="confirmPassword"
+                fill="outline"
+                required
+                icon="eye-off-outline"
+                errorText="Confirmation obligatoire"
+                (ionChange)="validatePassword()"
+                >
+              </ion-input>
+                  <span>
+                      <ion-icon (click)="toggleShowPassword()" slot="icon-only" [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+                  </span>
+              </div>
+
+
+      <ion-text color="danger" *ngIf="passwordMismatch">mots de passe incorrect</ion-text>
+      </ng-container>
+
+
+      <ng-container *ngIf="submissionType === 'join'"> 
+        <ion-input 
+        label="Numéro telephone" 
+        label-placement="floating" 
+        fill="outline"
+          #phoneInput="ngModel"
+          ngModel
+          type="number"
+          name="numTel"
+          errorText="Numéro de telephone obligatoire"
+          required>
+      </ion-input>
+
+
+      </ng-container>
+
+      
+          <ng-container *ngIf="submissionType === 'join'"> 
+            <ion-input 
+            label="Région" 
+            label-placement="floating" 
+            fill="outline"
+              #zone="ngModel"
+              ngModel
+              type="text"
+              name="zone"
+              errorText="veuillez indiqué votre region"
+              required>
+          </ion-input>
+    
+          </ng-container>
+
+
+          <ng-container *ngIf="submissionType === 'join'"> 
+            <ion-input 
+            label="Nom de la société" 
+            label-placement="floating" 
+            fill="outline"
+              #nomSt="ngModel"
+              ngModel
+              type="text"
+              name="nomSt"
+              errorText="veuillez indiqué votre region"
+              required>
+          </ion-input>
+    
+          </ng-container>
+
+
+
+
+
+
+      <p *ngIf="submissionType === 'join'" class="terms-and-conditions">
+        En cliquant sur Accepter & rejoindre, vous acceptez le Ooredoo
+        <ion-text color="primary">Accord de l'utilisateur</ion-text>,
+        <ion-text color="primary">Politique de confidentialité</ion-text>, et
+        <ion-text color="primary">Politique relative aux cookies</ion-text>.
+      </p>
+
+      <ion-button
+        [disabled]="!form.valid"
+        type="submit"
+        shape="round"
+        expand="block"
+      >
+        {{ submissionType === 'login' ? 's"identifier' : 'Accepter et rejoindre' }}
+      </ion-button>
+
+
+
+    </ion-card>
+  </form>
+
+  <div class="toggle-text">
+    {{ submissionType === 'login' ? 'Nouveau sur FixedApp?' : 'Déjà sur FixedApp' }}
+    <ion-text class="toggle-auth-mode" color="primary" (click)="toggleText()">
+      {{ submissionType === 'login' ? 'Adhérer maintenant' : 'S"identifier' }}
+    </ion-text>
+  </div>
+
+</ion-content>

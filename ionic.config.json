@@ -1,5 +1,7 @@
 {
   "name": "fixedSS",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular-standalone"
 }

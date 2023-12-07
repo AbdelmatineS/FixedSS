@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { AlertController, IonicModule, ModalController, NavController } from '@ionic/angular';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DetailDemandePage } from './detail-demande/detail-demande.page';
 import { SousTraitantService } from '../services/sous-traitant.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-demande',
@@ -22,32 +23,77 @@ import { SousTraitantService } from '../services/sous-traitant.service';
 export class DemandePage implements OnInit {
 
 
+
   searchTerm: string | undefined;
   data: any = [];
   demandes: any = [];
 
   constructor(
     private modalCtrl: ModalController,
-    private http: HttpClient,
-    private stService: SousTraitantService
+    private stService: SousTraitantService,
+    private alertController: AlertController,
+    private navCtrl: NavController,
+    private router: Router
+
   ) { }
 
   ngOnInit() {
-/*     this.getListDemande();
- */  }
+    this.getListDemande();
+  }
 
 
   Search(){
 
   }
 
-/*   getListDemande(){
+  goToEvents(demandeId: number) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        id: demandeId
+      }
+    };
+    console.log(demandeId);
+    this.router.navigate(['/planning'], navigationExtras);  
+  }
+
+  async callNumber(number: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirmer l"appel',
+      message: `Voulez vous appeler ce numéro: ${number}?`,
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          handler: () => {
+            console.log('Call canceled');
+          }
+        },
+        {
+          text: 'Appeler',
+          handler: () => {
+            window.open(`tel:${number}`, '_system');
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      this.getListDemande();
+      event.target.complete();
+    }, 2000);
+  }
+
+  getListDemande(){
     this.stService.getAllDemandeinter().subscribe(data => {
       console.log(data);
       this.demandes = data;
     })
   }
- */
+
   loadMore($event: Event) {
     throw new Error('Method not implemented.');
     }

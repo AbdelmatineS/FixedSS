@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonicModule, IonModal, IonRouterOutlet } from '@ionic/angular';
+import { IonicModule, IonModal, IonRouterOutlet, NavController } from '@ionic/angular';
 import { CalendarComponent, CalendarMode, NgCalendarModule } from 'ionic7-calendar';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule, registerLocaleData } from '@angular/common';
@@ -8,6 +8,7 @@ import localeFr from '@angular/common/locales/fr'
 import { CalEvent, EventsService } from './services/events.service';
 import { format, parseISO } from 'date-fns';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 registerLocaleData(localeFr, 'fr');
 
 @Component({
@@ -28,6 +29,8 @@ registerLocaleData(localeFr, 'fr');
 
 })
 export class PlanningPage implements OnInit {
+
+  demandeId: number | null = null; // Initialize it to null or a default value
 
 
   calendar = {
@@ -58,7 +61,11 @@ export class PlanningPage implements OnInit {
   constructor(
     private ionRouterOutler: IonRouterOutlet,
     private http: HttpClient,
-    private eventsService: EventsService
+    private eventsService: EventsService,
+    private route: ActivatedRoute,
+    private router:Router, 
+
+
 
   ) {
     this.presentingElement = ionRouterOutler.nativeEl;
@@ -68,6 +75,14 @@ export class PlanningPage implements OnInit {
 
   async ngOnInit() {
     this.eventSource = await this.eventsService.getData();
+
+
+    this.route.queryParams.subscribe(params => {
+      this.demandeId = params['id'];
+    });
+    console.log(this.demandeId);
+
+
     }
 
   setToday(){
@@ -88,14 +103,17 @@ export class PlanningPage implements OnInit {
     this.formatedStart = format(ev.selectedTime, 'd MMM, H:mm a');
     this.newEvent.startTime = format(ev.selectedTime, "yyyy-MM-dd'T'HH:mm:ss");
 
-    const later = ev.selectedTime.setHours(ev.selectedTime.getHours() + 1);
+     const later = ev.selectedTime.setHours(ev.selectedTime.getHours() + 1);
     this.formatedEnd = format(later, 'd MMM, H:mm a');
     this.newEvent.endTime = format(later, "yyyy-MM-dd'T'HH:mm:ss");
-
+ 
     if (this.calendar.mode === 'day' || this.calendar.mode === 'week'){
       this.modal.present();
     }
   }
+
+ 
+
 
   scheduleEvent(){
 
@@ -131,11 +149,11 @@ export class PlanningPage implements OnInit {
 
   }
 
-  endChanged(value: any){
+   endChanged(value: any){
 
     this.newEvent.endTime = value;
     this.formatedEnd = format(parseISO(value), 'd MMM, H:mm a');
 
-  }
+  } 
 
 }

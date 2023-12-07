@@ -15,6 +15,10 @@
   [debounce]="1000"
   ></ion-searchbar>
 
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list [inset]="true">
     <ion-list-header>
         <ion-col size="4" size-md="2" size-lg="1">
@@ -24,7 +28,7 @@
           Nature        
         </ion-col>
         <ion-col size="1" class="ion-hide-lg-down">
-          Type
+          Catégorie
         </ion-col>
         <ion-col size="1" class="ion-hide-lg-down">
           Abonnement
@@ -65,10 +69,10 @@
       </ion-col>
 
       <ion-col size="1" class="ion-hide-lg-down">
-      {{ d.nature }}
+      {{ d.type }}
       </ion-col>
       <ion-col size="1" class="ion-hide-lg-down">
-        {{ d.type }}
+        {{ d.category }}
       </ion-col>
       <ion-col size="1" class="ion-hide-lg-down">
         {{ d.abonnement }}
@@ -77,26 +81,40 @@
         {{ d.msisdn }}
       </ion-col>
       <ion-col size="1" class="ion-hide-md-down">
-        {{ d.fullName }}
+        {{ d.reservation?.nom }} {{ d.reservation?.prenom }}
       </ion-col>
       <ion-col size="3" size-md="2" size-lg="1" class="ion-hide-md-down">
-        {{ d.adresse }}
+        {{ d.reservation?.adresse }}
       </ion-col>
       <ion-col size="2" size-md="2" size-lg="1" class="ion-hide-lg-down">
-        {{ d.latitude }} , {{d.longitude}}
+        <a [href]="'https://www.google.com/maps/search/?api=1&query=' + d.reservation?.latitude + ',' + d.reservation?.longitude" target="_blank">
+        {{ d.reservation?.latitude }} , {{d.reservation?.longitude}}
+        </a>
       </ion-col>
-      <ion-col size="3" size-md="2" size-lg="1" >
-        {{ d.contact }}
+      <ion-col size="3" size-md="2" size-lg="1" (click)="callNumber(d.reservation?.telOne)" >
+        {{ d.reservation?.telOne }}
       </ion-col>
-      <ion-col size="2" size-md="2" size-lg="1" class="ion-hide-lg-down">
+      <ion-col size="2" size-md="2" size-lg="1" (click)="callNumber(d.reservation?.telTwo)" class="ion-hide-lg-down">
+        {{ d.reservation?.telTwo }}
       </ion-col>
       <ion-col size="4" size-md="2" size-lg="2">
 
         <ng-container *ngIf="d.datePlanif">
           {{ d.datePlanif}}
         </ng-container>
+
         <ng-container *ngIf="!d.datePlanif">
-          <ion-input 
+          <div class="center">
+            <ion-col size="auto">
+              <ion-icon (click)="goToEvents(d.id)" name="calendar-clear-sharp"></ion-icon>
+              </ion-col>
+          </div>
+
+         </ng-container>
+
+          
+      <!--           
+        <ion-input 
           size="small"
           type="date" 
           max="2005"
@@ -105,13 +123,14 @@
           color="light" 
           fill="clear">
 
-        </ion-input>
-        </ng-container>
-
-          <!--(click)="changeDate(i)"
-                  <ion-icon color="medium" name="calendar-sharp" slot="icon-only">
-        </ion-icon>
+        </ion-input> 
+      
       -->
+
+      <!--
+           <ion-icon           (click)="goToEvents()"
+          color="medium" name="calendar-sharp" slot="icon-only">
+        </ion-icon> -->
 
       </ion-col>
     

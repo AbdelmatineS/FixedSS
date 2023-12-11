@@ -143,17 +143,13 @@ export class PlanningPage implements OnInit {
     }
 
   startChanged(value: any){
-
     this.newEvent.startTime = value;
     this.formatedStart = format(parseISO(value), 'd MMM, H:mm a');
-
   }
 
    endChanged(value: any){
-
     this.newEvent.endTime = value;
     this.formatedEnd = format(parseISO(value), 'd MMM, H:mm a');
-
   } 
 
 }

@@ -31,10 +31,10 @@
     "@ionic/angular": "^7.0.0",
     "@ionic/storage-angular": "^4.0.0",
     "date-fns": "^2.30.0",
-    "ionic7-calendar": "^2.1.0",
+    "ionic7-calendar": "2.1.x",
     "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",
-    "swiper": "^10.3.0",
+    "swiper": "10.3.x",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

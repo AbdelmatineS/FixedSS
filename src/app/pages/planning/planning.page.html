@@ -43,11 +43,11 @@
 
 
 
-<calendar>
+<calendar
+[calendarMode]="calendar.mode"
 [eventSource]="eventSource"
 [startingDayMonth]="1"
 [startingDayWeek]="1"
-[calendarMode]="calendar.mode"
 [startHour]="8"
 [endHour]="18"
 [autoSelect]="false"
@@ -117,7 +117,7 @@
         >
         </ion-datetime>
 
-        <ng-container *ngIf="!newEvent.allDay">
+         <ng-container *ngIf="!newEvent.allDay">
           <ion-item (click)="showEnd = !showEnd">
             <ion-label>Ends</ion-label>
             <ion-text slot="end">{{ formatedEnd }}</ion-text>

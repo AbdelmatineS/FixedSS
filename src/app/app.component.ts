@@ -14,7 +14,6 @@ register();
   styleUrls: ['app.component.scss'],
   standalone: true,
   imports: [
-
     FormsModule,
     IonicModule,
     HttpClientModule,

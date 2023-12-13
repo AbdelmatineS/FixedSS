@@ -5,6 +5,7 @@ import { register } from 'swiper/element/bundle';
 import { EventsService } from './pages/planning/services/events.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgCalendarModule } from 'ionic7-calendar';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 register();
 
@@ -14,6 +15,7 @@ register();
   styleUrls: ['app.component.scss'],
   standalone: true,
   imports: [
+    IonicStorageModule,
     FormsModule,
     IonicModule,
     HttpClientModule,

@@ -1,12 +1,13 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {map, Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 
+const AUTH_API = `${environment.baseApiUrl}/api/authSt/`;
 
-const AUTH_API = 'http://localhost:8080/FixedApp/api/authSt/';
+//const AUTH_API = 'http://localhost:8080/FixedApp/api/authSt/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -63,6 +64,9 @@ export class AuthService {
   logout(): Observable<any> {
     return this.http.post(AUTH_API + 'signout', { }, httpOptions);
   }
+
+
+
 
 }
 

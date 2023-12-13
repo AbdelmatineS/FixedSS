@@ -75,7 +75,7 @@ export class LoginPage implements OnInit {
         {
           text: 'Quitter',
           handler: () => {
-            App.exitApp(); // Close the app
+            App.exitApp();
           }
         }
       ]
@@ -100,6 +100,10 @@ export class LoginPage implements OnInit {
       message: message,
     });
     await alert.present();
+    
+     setTimeout(() => {
+       alert.dismiss();
+     }, 1000);
   }
   
   async presentErrorAlert(message: string) {

@@ -8,7 +8,7 @@
     </ion-title>
     <ion-buttons slot="end">
       <ion-button expand="block" (click)="setToday()">
-        Today
+        Aujourd'hui
     </ion-button>
     </ion-buttons>
 
@@ -17,9 +17,9 @@
 
 <ion-content >
 <ion-segment [(ngModel)]="calendar.mode">
-  <ion-segment-button value="month">Month</ion-segment-button>
-  <ion-segment-button value="week">Week</ion-segment-button>
-  <ion-segment-button value="day">Day</ion-segment-button>
+  <ion-segment-button value="month">Mois</ion-segment-button>
+  <ion-segment-button value="week">Semaine</ion-segment-button>
+  <ion-segment-button value="day">Jour</ion-segment-button>
 
   </ion-segment>
 
@@ -73,7 +73,7 @@
         <ion-buttons slot="start">
           <ion-button (click)="modal.dismiss()"> Annuler </ion-button>
         </ion-buttons>
-        <ion-title>New event</ion-title>
+        <ion-title>Nouvel évènement</ion-title>
         <ion-buttons slot="end">
           <ion-button
           color="primary"
@@ -88,23 +88,23 @@
       <div class="group">
         <ion-input
         type="text"
-        [(ngModel)]="newEvent.title" placeholder="Title"
+        [(ngModel)]="newEvent.title" placeholder="Titre"
         >
 
         </ion-input>
       </div>
 
       <div class="group">
-        <ion-item>
+         <ion-item>
 
           <ion-toggle
           [(ngModel)]="newEvent.allDay">
-          All Day
+          Toute la journée
           </ion-toggle>
-        </ion-item>
+        </ion-item> 
 
         <ion-item (click)="showStart = !showStart">
-          <ion-label>Starts</ion-label>
+          <ion-label>Commence</ion-label>
           <ion-text slot="end">{{ formatedStart }}</ion-text>
         </ion-item>
         <ion-datetime 
@@ -117,9 +117,9 @@
         >
         </ion-datetime>
 
-         <ng-container *ngIf="!newEvent.allDay">
+          <ng-container *ngIf="!newEvent.allDay">
           <ion-item (click)="showEnd = !showEnd">
-            <ion-label>Ends</ion-label>
+            <ion-label>Fin</ion-label>
             <ion-text slot="end">{{ formatedEnd }}</ion-text>
           </ion-item>
           <ion-datetime 

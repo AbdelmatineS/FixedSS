@@ -106,7 +106,7 @@
         <ng-container *ngIf="!d.datePlanif">
           <div class="center">
             <ion-col size="auto">
-              <ion-icon (click)="goToEvents(d.id)" name="calendar-clear-sharp"></ion-icon>
+              <ion-icon (click)="goToEvents(d.id,d.reservation?.telOne)" name="calendar-clear-sharp"></ion-icon>
               </ion-col>
           </div>
 

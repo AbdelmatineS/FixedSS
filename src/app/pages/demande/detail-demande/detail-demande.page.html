@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-title>detail demande : {{ itemDetails?.fullName }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="medium" (click)="cancel()">Retour</ion-button>
+      <ion-button (click)="cancel()">Retour</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -15,93 +15,127 @@
 <ion-card>
   <ion-row>
     <ion-col>
-      <ion-input               
-      label-placement="floating" 
-      label="Date de demande" 
-      disabled 
-      fill="outline">
-      {{ itemDetails.dateDemande }}
-      </ion-input>
-    </ion-col>
-    <ion-col>
-      <ion-input               label-placement="floating" 
-      label="Nature" disabled fill="outline">
-        {{ itemDetails.nature }}
-      </ion-input>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <ion-input               label-placement="floating" 
-      label="Type" disabled fill="outline">
-        {{ itemDetails.type }}
-      </ion-input>
-    </ion-col>
-    <ion-col>
-      <ion-input               label-placement="floating" 
-      label="Abonnement" disabled fill="outline">
-        {{ itemDetails.Abonnement }}
-      </ion-input>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-input               label-placement="floating" 
-     label="MSISDN" disabled fill="outline">
-      {{ itemDetails.msisdn }}
-    </ion-input>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <ion-input               label-placement="floating" 
-       label="Nom et prénom" disabled fill="outline">
-        {{ itemDetails.fullName }}
-      </ion-input>
-    </ion-col>
-    <ion-col>
-      <ion-input               
-      label-placement="floating" 
-      label="Adresse" 
-      disabled 
-      fill="outline">
-      </ion-input>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <ion-input               
-      label-placement="floating" 
-      label="CGPS" 
-      disabled 
-      fill="outline">
-    </ion-input>
-    </ion-col>
-    <ion-col>
-      <ion-input 
-      label-placement="floating" 
-      label="Contact 1" 
-      disabled fill="outline">
-      </ion-input>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <ion-input               
-      label-placement="floating" 
-      label="Contact 2"
-      disabled 
-      fill="outline">
 
-      </ion-input>
+      <ion-item detail="false" fill="outline" lines="none">
+        <ion-label>
+          <strong>Date de demande</strong><br/>
+          <ion-text>{{ itemDetails.dateDemande }}</ion-text>
+        </ion-label>
+      </ion-item>
+
     </ion-col>
     <ion-col>
-      <ion-input               
-      label-placement="floating" 
-      label="Date d'intervention planifié" 
-      disabled 
-      fill="outline">
-      </ion-input>
+      <ion-item detail="false" fill="outline" lines="none">
+        <ion-label>
+          <strong>Nature</strong><br/>
+          <ion-text>{{ itemDetails.nature }}</ion-text>
+        </ion-label>
+      </ion-item>
+
     </ion-col>
   </ion-row>
+  <ion-row>
+    <ion-col>
+
+      <ion-item detail="false" fill="outline" lines="none">
+        <ion-label>
+          <strong>Categorie</strong><br/>
+          <ion-text>{{ itemDetails.category }}</ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item detail="false" fill="outline" lines="none">
+        <ion-label>
+          <strong>abonnement</strong><br/>
+          <ion-text>{{ itemDetails.Abonnement }}</ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item detail="false" fill="outline" lines="none">
+        <ion-label>
+          <strong>Adresse</strong><br/>
+          <ion-text>{{ itemDetails.reservation.adresse }}</ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item detail="false" fill="outline" lines="none">
+        <ion-label>
+          <strong>Nom complet</strong><br/>
+          <ion-text>{{ itemDetails.reservation.nom }} {{itemDetails.reservation.prenom}}</ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item detail="false" fill="outline" lines="none">
+        <ion-label>
+          <strong>MSISDN</strong><br/>
+          <ion-text>{{ itemDetails.msisdn }}</ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item detail="false" fill="outline" lines="none">
+        <ion-label>
+          <strong>CGPS</strong><br/>
+          <ion-text>{{ itemDetails.reservation.latitude}},{{itemDetails.reservation.longitude}}</ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item detail="false" fill="outline" lines="none">
+        <ion-label>
+          <strong>Contact 1</strong><br/>
+          <ion-text>{{ itemDetails.reservation.telOne }}</ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-item detail="false" fill="outline" lines="none">
+        <ion-label>
+          <strong>Contact 2</strong><br/>
+          <ion-text>{{ itemDetails.reservation.telTwo }}</ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item detail="false" fill="outline" lines="none">
+        <ion-label>
+          <strong>Date d'intervention</strong><br/>
+          <ion-text>{{ itemDetails.DatePlanif }}</ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+
+  <div style="display: flex; justify-content: center; margin-top: 20px;">
+    <div style="display: flex; align-items: center; margin-right: 10px;">
+      <div [style]="getStatusCircleStyle(itemDetails.status, 'status1')"></div>
+      <ion-label style="margin-left: 5px;">Status 1</ion-label>
+    </div>
+  
+    <div style="display: flex; align-items: center; margin-right: 10px;">
+      <div [style]="getStatusCircleStyle(itemDetails.status, 'status2')"></div>
+      <ion-label style="margin-left: 5px;">Status 2</ion-label>
+    </div>
+  
+    <div style="display: flex; align-items: center;">
+      <div [style]="getStatusCircleStyle(itemDetails.status, 'status3')"></div>
+      <ion-label style="margin-left: 5px;">Status 3</ion-label>
+    </div>
+  </div>
+  
 </ion-card>
 
 

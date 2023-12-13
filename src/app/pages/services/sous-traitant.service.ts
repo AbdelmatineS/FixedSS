@@ -1,5 +1,6 @@
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -26,4 +27,17 @@ export class SousTraitantService {
     return this.http.get(url);
   }
 
+  
+  retrieveDemandeInterById(id: number): Observable<any> {
+    return this.http.get<any>(`${environment.baseApiUrl}/api/DemandeInter/retrieveDemandeInter/${id}`);
+  }
+
+  updateDatePlanif(demandeId: number | null, newDatePlanif: string): Observable<any> {
+    const url = `${environment.baseApiUrl}/api/DemandeInter/updateDatePlanif/${demandeId}`;
+    const params = new HttpParams().set('newDatePlanif', newDatePlanif);
+
+    return this.http.put(url, null, { params });
+    //return this.http.put(url, body);
+  }
+  
 }

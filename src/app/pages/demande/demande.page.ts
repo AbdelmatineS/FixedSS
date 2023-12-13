@@ -46,10 +46,12 @@ export class DemandePage implements OnInit {
 
   }
 
-  goToEvents(demandeId: number) {
+  goToEvents(demandeId: number, phone: number) {
     const navigationExtras: NavigationExtras = {
       queryParams: {
-        id: demandeId
+        id: demandeId,
+        num: phone
+
       }
     };
     console.log(demandeId);
@@ -98,6 +100,7 @@ export class DemandePage implements OnInit {
     throw new Error('Method not implemented.');
     }
 
+    
     async openDetails(itemDetails: any) {
       const modal = await this.modalCtrl.create({
         component: DetailDemandePage,

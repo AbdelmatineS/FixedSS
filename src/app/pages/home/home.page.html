@@ -2,7 +2,7 @@
 <ion-header [translucent]="true" class="ion-no-border">
 	<ion-toolbar>
 		<ion-buttons slot="start">
-			<ion-button>
+			<ion-button (click)="removePermissions()">
                     <ion-img src="assets/images/head.png"/>
 			</ion-button>
 		</ion-buttons>
@@ -15,7 +15,7 @@
                 <ng-template>
                   <ion-content>
                     <ion-list>
-                      <ion-item [button]="true" [detail]="false">Notifications</ion-item>
+                      <ion-item [button]="true" (click)="requestPermissions()" [detail]="false">Notifications</ion-item>
                       <ion-item button (click)="onLogout()" [button]="true" [detail]="false" >Déconnection</ion-item>
                     </ion-list>
                   </ion-content>

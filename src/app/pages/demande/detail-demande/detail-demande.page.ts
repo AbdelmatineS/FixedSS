@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail-demande',
@@ -15,7 +16,10 @@ export class DetailDemandePage implements OnInit {
 
   @Input() itemDetails: any;
   cgps: string = "" ;
-  constructor(private modalCtrl: ModalController) { }
+  constructor(
+    private modalCtrl: ModalController,
+    private router: Router
+    ) { }
 
   ngOnInit() {
     this.cgps= this.itemDetails.latitude + " ," + this.itemDetails.longitude;
@@ -23,6 +27,20 @@ export class DetailDemandePage implements OnInit {
 
   cancel() {
     return this.modalCtrl.dismiss(null, 'cancel');
+  }
+
+
+  goToEvents(demandeId: number, prenom: string) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        id: demandeId,
+        prenom: prenom
+
+      }
+    };
+    console.log(demandeId);
+    this.modalCtrl.dismiss(null, 'cancel');
+    this.router.navigate(['/planning'], navigationExtras);  
   }
 
   getStatusCircleStyle(status: string, targetStatus: string): any {

@@ -51,7 +51,7 @@
         </ion-col>
         
         <ion-col size="2" size-md="2" size-lg="1" class="ion-hide-lg-down">
-        Contact 2 
+        IMEI 
         </ion-col>        
         
         <ion-col size="4" size-md="2" size-lg="2">
@@ -69,33 +69,33 @@
       </ion-col>
 
       <ion-col size="1" class="ion-hide-lg-down">
-      {{ d.type }}
+      {{ d.nature }}
       </ion-col>
       <ion-col size="1" class="ion-hide-lg-down">
-        {{ d.category }}
+        {{ d.category }} {{d.activation.fix.type}}
       </ion-col>
       <ion-col size="1" class="ion-hide-lg-down">
-        {{ d.abonnement }}
+        {{ d.abonnement }} {{d.activation.fix.debit}}
       </ion-col>
       <ion-col size="1" class="ion-hide-md-down">
-        {{ d.msisdn }}
+        {{ d.activation.fix.msisdn }}
       </ion-col>
       <ion-col size="1" class="ion-hide-md-down">
-        {{ d.reservation?.nom }} {{ d.reservation?.prenom }}
+        {{ d.activation?.prenom }} {{ d.activation?.nom }}
       </ion-col>
       <ion-col size="3" size-md="2" size-lg="1" class="ion-hide-md-down">
-        {{ d.reservation?.adresse }}
+        {{ d.activation?.adresse }}
       </ion-col>
       <ion-col size="2" size-md="2" size-lg="1" class="ion-hide-lg-down">
         <a [href]="'https://www.google.com/maps/search/?api=1&query=' + d.reservation?.latitude + ',' + d.reservation?.longitude" target="_blank">
-        {{ d.reservation?.latitude }} , {{d.reservation?.longitude}}
+        {{ d.activation?.latitude }} , {{d.activation?.longitude}}
         </a>
       </ion-col>
-      <ion-col size="3" size-md="2" size-lg="1" (click)="callNumber(d.reservation?.telOne)" >
-        {{ d.reservation?.telOne }}
+      <ion-col size="3" size-md="2" size-lg="1" (click)="callNumber(d.activation?.numContact)" >
+        {{ d.activation?.numContact }}
       </ion-col>
-      <ion-col size="2" size-md="2" size-lg="1" (click)="callNumber(d.reservation?.telTwo)" class="ion-hide-lg-down">
-        {{ d.reservation?.telTwo }}
+      <ion-col size="2" size-md="2" size-lg="1" class="ion-hide-lg-down">
+        {{ d.activation.fix.imei }}
       </ion-col>
       <ion-col size="4" size-md="2" size-lg="2">
 
@@ -106,7 +106,7 @@
         <ng-container *ngIf="!d.datePlanif">
           <div class="center">
             <ion-col size="auto">
-              <ion-icon (click)="goToEvents(d.id,d.reservation?.telOne)" name="calendar-clear-sharp"></ion-icon>
+              <ion-icon (click)="goToEvents(d.id,d.activation?.numContact)" name="calendar-clear-sharp"></ion-icon>
               </ion-col>
           </div>
 
@@ -137,6 +137,7 @@
     </ion-item>
   </ion-list>
 
+<!--
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
     <ion-infinite-scroll-content
     loadingSpinner="circles"
@@ -144,4 +145,6 @@
 
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
+
+-->
 </ion-content>

@@ -19,15 +19,19 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/planning/planning.page').then( m => m.PlanningPage)
   },
   {
-    path: 'traitement',
-    loadComponent: () => import('./pages/traitement/traitement.page').then( m => m.TraitementPage)
-  },
-  {
     path: 'detail-demande',
     loadComponent: () => import('./pages/demande/detail-demande/detail-demande.page').then( m => m.DetailDemandePage)
   },
   {
     path: 'login',
     loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
+  },
+  {
+    path: 'traitement',
+    loadComponent: () => import('./pages/planning/traitement/traitement.page').then( m => m.TraitementPage)
+  },
+  {
+    path: 'parametres',
+    loadComponent: () => import('./pages/parametres/parametres.page').then( m => m.ParametresPage)
   },
 ];

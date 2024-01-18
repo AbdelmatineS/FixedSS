@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.ooredoo.fixedss;
 
 import com.getcapacitor.BridgeActivity;
 

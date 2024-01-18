@@ -22,6 +22,10 @@ export class SousTraitantService {
     return this.http.get(`${environment.baseApiUrl}/api/DemandeInter/retrieveallDemandeInter`);
   }
 
+  getAllDemandeinterByUser(userId: number | null): Observable<any> {
+    return this.http.get(`${environment.baseApiUrl}/api/DemandeInter/retrieveallDemandeInterByUserSt/${userId}`);
+  }
+
   searchDemandeinter(attribute: string, query: string) {
     const url = `${environment.baseApiUrl}/api/DemandeInter/search?attribute=${attribute}&query=${query}`;
     return this.http.get(url);

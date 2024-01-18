@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DetailDemandePage } from '../demande/detail-demande/detail-demande.page';
 import { catchError, of, switchMap, tap } from 'rxjs';
 import { SousTraitantService } from '../services/sous-traitant.service';
+import { TraitementPage } from './traitement/traitement.page';
 registerLocaleData(localeFr, 'fr');
 
 @Component({
@@ -33,11 +34,12 @@ registerLocaleData(localeFr, 'fr');
 })
 export class PlanningPage implements OnInit {
 
+
   demandeId: number | null = null; // Initialize it to null or a default value
-  Phone: number | null = null;
+  prenom: string= "";
 
   calendar = {
-    mode: 'month' as CalendarMode,
+    mode: "month" as CalendarMode,
     currentDate: new Date(),
   }
 
@@ -50,7 +52,7 @@ export class PlanningPage implements OnInit {
 
   newEvent: any = {
     id: this.demandeId,
-    title: this.Phone,
+    title: this.prenom,
     allDay: false,
     startTime: null,
     endTime: null
@@ -87,9 +89,12 @@ export class PlanningPage implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       this.demandeId = params['id'];
-      this.Phone = params['phone'];
+      this.prenom = params['prenom'];
     });
     console.log(this.demandeId);
+    console.log(this.prenom);
+    console.log(this.newEvent);
+
 
 
     }
@@ -151,7 +156,7 @@ export class PlanningPage implements OnInit {
         },
         error => {
           loading.dismiss();
-          this.presentErrorAlert('Echec de l"opération: '+error);
+          this.presentErrorAlert('Vous n"avez séléctionner aucune demande à planifié ');
           console.error('Error updating DatePlanif:', error);
         }
       );
@@ -199,7 +204,7 @@ export class PlanningPage implements OnInit {
 
 
   async openDetails(event: any) {
-    const loadingAlert = await this.presentLoading('Authentification...'); // Show loading spinner for login
+    const loadingAlert = await this.presentLoading('Récupération des données...'); // Show loading spinner for login
 
     this.dService.retrieveDemandeInterById(event.id)
       .subscribe(
@@ -207,7 +212,7 @@ export class PlanningPage implements OnInit {
           loadingAlert.dismiss(); // Dismiss loading spinner
           console.log('Retrieved demande:', data);
           const modal = await this.modalCtrl.create({
-            component: DetailDemandePage,
+            component: TraitementPage,
             componentProps: {
               itemDetails: data,
             },

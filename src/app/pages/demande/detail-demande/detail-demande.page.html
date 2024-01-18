@@ -8,10 +8,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-button>fixer date d'intervention</ion-button>
 
-  </ion-card>
 <ion-card>
   <ion-row>
     <ion-col>
@@ -47,8 +44,8 @@
     <ion-col>
       <ion-item detail="false" fill="outline" lines="none">
         <ion-label>
-          <strong>abonnement</strong><br/>
-          <ion-text>{{ itemDetails.Abonnement }}</ion-text>
+          <strong>Abonnement</strong><br/>
+          <ion-text>{{ itemDetails.abonnement }}</ion-text>
         </ion-label>
       </ion-item>
     </ion-col>
@@ -58,7 +55,7 @@
       <ion-item detail="false" fill="outline" lines="none">
         <ion-label>
           <strong>Adresse</strong><br/>
-          <ion-text>{{ itemDetails.reservation.adresse }}</ion-text>
+          <ion-text>{{ itemDetails.activation.adresse }}</ion-text>
         </ion-label>
       </ion-item>
     </ion-col>
@@ -69,7 +66,7 @@
       <ion-item detail="false" fill="outline" lines="none">
         <ion-label>
           <strong>Nom complet</strong><br/>
-          <ion-text>{{ itemDetails.reservation.nom }} {{itemDetails.reservation.prenom}}</ion-text>
+          <ion-text>{{ itemDetails.activation.prenom }} {{itemDetails.activation.nom}}</ion-text>
         </ion-label>
       </ion-item>
     </ion-col>
@@ -77,7 +74,7 @@
       <ion-item detail="false" fill="outline" lines="none">
         <ion-label>
           <strong>MSISDN</strong><br/>
-          <ion-text>{{ itemDetails.msisdn }}</ion-text>
+          <ion-text>{{ itemDetails.activation.fix.msisdn }}</ion-text>
         </ion-label>
       </ion-item>
     </ion-col>
@@ -87,7 +84,7 @@
       <ion-item detail="false" fill="outline" lines="none">
         <ion-label>
           <strong>CGPS</strong><br/>
-          <ion-text>{{ itemDetails.reservation.latitude}},{{itemDetails.reservation.longitude}}</ion-text>
+          <ion-text>{{ itemDetails.activation.latitude}},{{itemDetails.activation.longitude}}</ion-text>
         </ion-label>
       </ion-item>
     </ion-col>
@@ -95,7 +92,7 @@
       <ion-item detail="false" fill="outline" lines="none">
         <ion-label>
           <strong>Contact 1</strong><br/>
-          <ion-text>{{ itemDetails.reservation.telOne }}</ion-text>
+          <ion-text>{{ itemDetails.activation.numContact }}</ion-text>
         </ion-label>
       </ion-item>
     </ion-col>
@@ -104,8 +101,8 @@
     <ion-col>
       <ion-item detail="false" fill="outline" lines="none">
         <ion-label>
-          <strong>Contact 2</strong><br/>
-          <ion-text>{{ itemDetails.reservation.telTwo }}</ion-text>
+          <strong>IMEI</strong><br/>
+          <ion-text>{{ itemDetails.activation.fix.imei }}</ion-text>
         </ion-label>
       </ion-item>
     </ion-col>
@@ -138,12 +135,16 @@
   
 </ion-card>
 
+<ion-card>
+  <ion-button color="danger" (click)="cancel()">Quitter</ion-button>
+  <ion-button color="success" (click)="goToEvents(itemDetails.id,itemDetails.reservation?.prenom)">Replanifier</ion-button>
+</ion-card>
 
 </ion-content>
 
 <!--
 
-  value={{ itemDetails.contact }}              
+      value={{ itemDetails.contact }}              
       value={{ itemDetails.adresse }}
       value={{ itemDetails.datePlanif }}
 

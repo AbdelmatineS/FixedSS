@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "395580613278",
+    "project_id": "fixedss",
+    "storage_bucket": "fixedss.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395580613278:android:89eb3c3356441d02ef118f",
+        "android_client_info": {
+          "package_name": "com.ooredoo.fixedss"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpTQ8-24kY8t0x7q-WMgR5fHXTxg--n2M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

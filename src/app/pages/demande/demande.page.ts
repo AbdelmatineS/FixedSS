@@ -6,6 +6,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DetailDemandePage } from './detail-demande/detail-demande.page';
 import { SousTraitantService } from '../services/sous-traitant.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { StorageService } from '../login/services/storage.service';
 
 @Component({
   selector: 'app-demande',
@@ -29,6 +30,7 @@ export class DemandePage implements OnInit {
   demandes: any = [];
 
   constructor(
+    private storageService: StorageService,
     private modalCtrl: ModalController,
     private stService: SousTraitantService,
     private alertController: AlertController,
@@ -38,7 +40,7 @@ export class DemandePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getListDemande();
+    this.getListDemandeByUser();
   }
 
 
@@ -84,7 +86,7 @@ export class DemandePage implements OnInit {
 
   handleRefresh(event: any) {
     setTimeout(() => {
-      this.getListDemande();
+      this.getListDemandeByUser();
       event.target.complete();
     }, 2000);
   }
@@ -94,6 +96,16 @@ export class DemandePage implements OnInit {
       console.log(data);
       this.demandes = data;
     })
+  }
+
+  getListDemandeByUser(){
+    const userId = this.storageService.getUserId();
+
+    this.stService.getAllDemandeinterByUser(userId).subscribe(data => {
+      console.log(data);
+      this.demandes = data;
+    })
+    
   }
 
   loadMore($event: Event) {

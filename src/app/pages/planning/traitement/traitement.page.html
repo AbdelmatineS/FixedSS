@@ -1,0 +1,169 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Fiche d'intervention : {{ itemDetails?.fullName }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancel()">Retour</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Abonnement:</ion-card-title>
+      <ion-card-subtitle>{{ itemDetails.nature }}</ion-card-subtitle>
+      <ion-card-subtitle>{{ itemDetails.category }}</ion-card-subtitle>
+      <ion-card-subtitle>{{ itemDetails.abonnement }}</ion-card-subtitle>
+
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <p><b>MSISDN:</b></p>
+            <p>{{ itemDetails.activation.fix.msisdn }}</p>
+          </ion-col>
+          <ion-col size="6">
+            <p><b>Nom & Prénom:</b></p>
+            <p>{{ itemDetails.activation.prenom }} {{itemDetails.activation.nom}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <p><b>Adresse:</b></p>
+            <p>{{ itemDetails.activation.adresse }}</p>
+            <p>{{ itemDetails.activation.delegation }}- {{ itemDetails.activation.gouvernorat }}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+          <p><b>CGPS:</b></p>
+            <p>{{cgps}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+    <form [formGroup]="ficheInt" (ngSubmit)="onSubmit()">
+
+    <ion-card> 
+      <ion-card-header>
+        <ion-card-title>Action</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-grid>
+            <ion-radio-group formControlName="action">
+              <ion-radio value="REJECTED">Rejeter</ion-radio>
+              <ion-col size="6">        </ion-col>
+              <ion-radio value="SUCCESS">Traitée avec succés</ion-radio>
+            </ion-radio-group>
+
+            
+        </ion-grid>
+        <ng-container *ngIf="ficheInt.get('action')!.value === 'REJECTED'">
+          <ion-select
+          label="Raison* :"
+          placeholder="Préciser la raison"
+          label-placement="floating" 
+          fill="outline"
+          errorText="La raison est requise"
+          formControlName="raison"
+          >
+            <ion-select-option value="1">Absence de signal</ion-select-option>
+            <ion-select-option value="2">Adresse non conforme</ion-select-option>
+            <ion-select-option value="3">Autre</ion-select-option>
+
+           
+          </ion-select>
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
+    
+
+
+    <ion-card [class.photo-taken]="photoTaken">
+      <ion-card-header>
+        <ion-card-title>PV d'intervention*</ion-card-title>
+      </ion-card-header>
+      <ion-item>
+        <ion-text slot="start">Scanner le PV d'intervention:</ion-text>
+
+        <ion-icon 
+        name='camera'
+        slot="end"
+        (click)="takePicture()"
+        ></ion-icon>
+
+      </ion-item>
+      <ng-container *ngIf="photoTaken == true">
+        <div class="square-image">
+          <ion-img src="{{ImageSource}}">
+          </ion-img>
+
+        </div>
+
+      </ng-container>
+
+    </ion-card>
+
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Saisir le S/N en cas de swap</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-input
+      label="S/N" 
+      label-placement="floating" 
+      fill="outline"
+      type="text"
+      formControlName="snswap"
+      >
+    </ion-input>
+      </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Commentaire</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-input
+      label="Commentaire" 
+      label-placement="floating" 
+      fill="outline"
+      type="text"
+      formControlName="commentaire"
+      >
+    </ion-input>
+      </ion-card-content>
+  </ion-card>
+
+
+      <ion-card class="borderless-card">
+        <ion-card-content>
+          <ion-grid>
+              <div  class="center-container">
+                  <ion-button 
+                  [disabled]="!ficheInt.valid"
+                  type="submit"
+                  shape="round"
+                  color="success" 
+                  expand="block">Soumettre</ion-button>
+
+              </div>
+
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </form>
+</ion-card>
+</ion-content>

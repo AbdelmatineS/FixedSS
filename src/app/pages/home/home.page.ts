@@ -4,12 +4,14 @@ import { AlertController, IonicModule, NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../login/services/auth.service';
+import { PushNotifications } from '@capacitor/push-notifications';
+import { FcmService } from '../services/fcm/fcm.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  providers: [AuthService],
+  providers: [AuthService, FcmService],
   standalone: true,
   imports: [IonicModule, FormsModule, CommonModule],
 })
@@ -20,7 +22,8 @@ export class HomePage implements OnInit{
     private router:Router,
     private authService: AuthService,
     private alertController: AlertController,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private fcm: FcmService
 
 
     ) {}
@@ -45,8 +48,8 @@ export class HomePage implements OnInit{
         },    {
     
           img: 'assets/images/reg.png',
-          name: 'Traitements & interventions',
-          route: 'traitement'
+          name: 'Paramétres du compte',
+          route: 'parametres'
     
     
         }
@@ -98,5 +101,12 @@ export class HomePage implements OnInit{
       });
       await alert.present();
     }
+
+    public async requestPermissions(): Promise<void> {
+      await PushNotifications.requestPermissions();
+    }
     
+    public async removePermissions(): Promise<void>{
+      await this.fcm.removeFcmToken();
+    }
 }

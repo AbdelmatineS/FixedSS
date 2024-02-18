@@ -172,7 +172,7 @@
         shape="round"
         expand="block"
       >
-        {{ submissionType === 'login' ? 's"identifier' : 'Accepter et rejoindre' }}
+        {{ submissionType === 'login' ? 's\'identifier' : 'Accepter et rejoindre' }}
       </ion-button>
 
 
@@ -183,7 +183,7 @@
   <div class="toggle-text">
     {{ submissionType === 'login' ? 'Nouveau sur FixedApp?' : 'Déjà sur FixedApp' }}
     <ion-text class="toggle-auth-mode" color="primary" (click)="toggleText()">
-      {{ submissionType === 'login' ? 'Adhérer maintenant' : 'S"identifier' }}
+      {{ submissionType === 'login' ? 'Adhérer maintenant' : 'S\'identifier' }}
     </ion-text>
   </div>
 

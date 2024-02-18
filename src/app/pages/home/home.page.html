@@ -1,9 +1,9 @@
 
-<ion-header [translucent]="true" class="ion-no-border">
+<ion-header [translucent]="true"  class="ion-no-border">
 	<ion-toolbar>
 		<ion-buttons slot="start">
 			<ion-button (click)="removePermissions()">
-                    <ion-img src="assets/images/head.png"/>
+                  <ion-img src="assets/images/head.png"/>
 			</ion-button>
 		</ion-buttons>
         <ion-title>Fixed App</ion-title>
@@ -28,17 +28,21 @@
 
 
 
-<ion-content [fullscreen]="true" class="ion-padding">
+    <ion-content [fullscreen]="true">
 
-<div  class="content_div">
-    <ion-grid >
-        <ion-row>
-            <ion-col sizeLg="4" sizeMd="4" sizeXs="6" tappable (click)="goto(item)" *ngFor="let item of items ">
-                <div class="col_div">
-                    <img src="{{item.img}}">
-                    <ion-label>{{item.name}}</ion-label>
-                </div>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
-</div>
+
+    <div  class="content_div">
+      <ion-grid >
+          <ion-row>
+              <ion-col sizeLg="4" sizeMd="4" sizeXs="6" tappable (click)="goto(item)" *ngFor="let item of items ">
+                  <div class="col_div">
+                      <img src="{{item.img}}">
+                      <ion-label>{{item.name}}</ion-label>
+                  </div>
+              </ion-col>
+          </ion-row>
+      </ion-grid>
+  </div>
+
+</ion-content>
+

@@ -34,7 +34,7 @@
           Abonnement
         </ion-col>
         <ion-col size="1" class="ion-hide-md-down">
-          MSISDN        
+          CGPS        
         </ion-col>
         <ion-col size="1" class="ion-hide-md-down">
           Nom et prénom
@@ -43,7 +43,7 @@
           adresse
         </ion-col>
         <ion-col size="2" size-md="2" size-lg="1" class="ion-hide-lg-down">
-          CGPS
+          MSISDN
         </ion-col>        
         <ion-col size="3" size-md="2" size-lg="1" >
           Contact 1 
@@ -78,7 +78,9 @@
         {{ d.abonnement }} {{d.activation.fix.debit}}
       </ion-col>
       <ion-col size="1" class="ion-hide-md-down">
-        {{ d.activation.fix.msisdn }}
+        <a [href]="'https://www.google.com/maps/search/?api=1&query=' + d.activation?.latitude + ',' + d.activation?.longitude" target="_blank">
+          {{ d.activation?.latitude }} , {{d.activation?.longitude}}
+          </a>
       </ion-col>
       <ion-col size="1" class="ion-hide-md-down">
         {{ d.activation?.prenom }} {{ d.activation?.nom }}
@@ -87,9 +89,8 @@
         {{ d.activation?.adresse }}
       </ion-col>
       <ion-col size="2" size-md="2" size-lg="1" class="ion-hide-lg-down">
-        <a [href]="'https://www.google.com/maps/search/?api=1&query=' + d.activation?.latitude + ',' + d.activation?.longitude" target="_blank">
-        {{ d.activation?.latitude }} , {{d.activation?.longitude}}
-        </a>
+        {{ d.activation.fix.msisdn }}
+
       </ion-col>
       <ion-col size="3" size-md="2" size-lg="1" (click)="callNumber(d.activation?.numContact)" >
         {{ d.activation?.numContact }}

@@ -78,7 +78,7 @@ export class FcmService {
         console.log('My token: ', token);
         const fcm_token = (token?.value);
         let go = 1;
-        const saved_token = JSON.parse((await this.storage.getStorage(FCM_TOKEN)).value);
+        const saved_token = await this.storage.getStorage(FCM_TOKEN); // Get saved token directly
         if(saved_token) {
           if(fcm_token == saved_token) {
             console.log('same token');
@@ -117,6 +117,8 @@ export class FcmService {
               console.error('Error updating FCM Token:', error);
             });*/
         }else{
+          this.storage.setStorage(FCM_TOKEN, fcm_token);
+
           /*this.saveFcmToken(userId, JSON.stringify(fcm_token))
           .subscribe(
             (response) => {

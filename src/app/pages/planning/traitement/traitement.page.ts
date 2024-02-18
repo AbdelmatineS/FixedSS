@@ -55,7 +55,7 @@ ficheInt: FormGroup;
      }
 
   ngOnInit() {
-    this.cgps= this.itemDetails.reservation.latitude + "," + this.itemDetails.reservation.longitude;
+    this.cgps= this.itemDetails.activation.latitude + "," + this.itemDetails.activation.longitude;
     console.log(this.cgps);
   }
 

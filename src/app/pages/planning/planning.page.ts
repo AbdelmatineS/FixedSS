@@ -36,7 +36,7 @@ export class PlanningPage implements OnInit {
 
 
   demandeId: number | null = null; // Initialize it to null or a default value
-  prenom: string= "";
+  num: string= "";
 
   calendar = {
     mode: "month" as CalendarMode,
@@ -52,7 +52,7 @@ export class PlanningPage implements OnInit {
 
   newEvent: any = {
     id: this.demandeId,
-    title: this.prenom,
+    title: this.num,
     allDay: false,
     startTime: null,
     endTime: null
@@ -89,10 +89,10 @@ export class PlanningPage implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       this.demandeId = params['id'];
-      this.prenom = params['prenom'];
+      this.num = params['num'];
     });
     console.log(this.demandeId);
-    console.log(this.prenom);
+    console.log(this.num);
     console.log(this.newEvent);
 
 
@@ -140,7 +140,7 @@ export class PlanningPage implements OnInit {
       id: this.demandeId,
     }
 
-      const loading = await this.presentLoading('En cours d"informer le client du date planifié...');
+      const loading = await this.presentLoading('En cours d\'informer le client du date planifiée...');
   
       
       this.dService.updateDatePlanif(toAdd.id, this.newEvent.startTime)
@@ -156,7 +156,7 @@ export class PlanningPage implements OnInit {
         },
         error => {
           loading.dismiss();
-          this.presentErrorAlert('Vous n"avez séléctionner aucune demande à planifié ');
+          this.presentErrorAlert('Vous n\'avez séléctionner aucune demande à planifiée ');
           console.error('Error updating DatePlanif:', error);
         }
       );
@@ -169,7 +169,7 @@ export class PlanningPage implements OnInit {
     this.newEvent = {
 
       id:null,
-      title: '',
+      title: this.num,
       allDay: false,
       startTime: null,
       endTime: null,
@@ -220,6 +220,8 @@ export class PlanningPage implements OnInit {
           await modal.present();
         },
         (error) => {
+          loadingAlert.dismiss(); // Dismiss loading spinner
+
           this.presentErrorAlert(error.error.message); // Show error alert with message    
           console.error('Error retrieving demande:', error);
         }

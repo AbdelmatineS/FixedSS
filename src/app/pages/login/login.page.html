@@ -1,5 +1,8 @@
 <ion-content [fullscreen]="true">
 
+
+
+
   <div class="title-container">
     <ion-img src="assets/images/logo.png"/>
   </div>
@@ -12,10 +15,11 @@
 
 
   <form #form="ngForm" (ngSubmit)="onSubmit()">
-    <ion-card>
+    <ion-card class="cardi">
 
       <ng-container *ngIf="submissionType === 'join'">  
         <ion-input 
+        
         #firstName="ngModel"
         label="Nom et Prenom" 
         label-placement="floating" 
@@ -29,18 +33,19 @@
       </ion-input>
       </ng-container>
 
-      <ion-input 
-      label="Username" 
-      label-placement="floating" 
-      fill="outline"
-        #firstNameInput="ngModel"
-        ngModel
-        type="text"
-        name="username"
-        errorText="le nom d'utilisateur est obligatoire"
+        <ion-input 
+        label="Username" 
+        label-placement="floating" 
+        fill="outline"
+          #firstNameInput="ngModel"
+          ngModel
+          type="text"
+          name="username"
+          errorText="le nom d'utilisateur est obligatoire"
+  
+          required>
+      </ion-input>
 
-        required>
-    </ion-input>
 
 
 

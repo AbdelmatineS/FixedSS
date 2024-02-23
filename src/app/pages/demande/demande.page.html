@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true"  class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
@@ -24,9 +24,12 @@
         <ion-col size="4" size-md="2" size-lg="1">
           Date de demande
         </ion-col>
+        <!--
         <ion-col size="1" class="ion-hide-lg-down">
           Nature        
         </ion-col>
+        -->
+
         <ion-col size="1" class="ion-hide-lg-down">
           Catégorie
         </ion-col>
@@ -36,7 +39,7 @@
         <ion-col size="1" class="ion-hide-md-down">
           CGPS        
         </ion-col>
-        <ion-col size="1" class="ion-hide-md-down">
+        <ion-col size="2" class="ion-hide-md-down">
           Nom et prénom
         </ion-col>
         <ion-col size="2" size-md="2" size-lg="1" class="ion-hide-md-down">
@@ -45,7 +48,7 @@
         <ion-col size="2" size-md="2" size-lg="1" class="ion-hide-lg-down">
           MSISDN
         </ion-col>        
-        <ion-col size="3" size-md="2" size-lg="1" >
+        <ion-col size="4" size-md="2" size-lg="1">
           Contact 1 
 
         </ion-col>
@@ -55,7 +58,7 @@
         </ion-col>        
         
         <ion-col size="4" size-md="2" size-lg="2">
-          Date d'intervention planifié
+          Date d'intervention planifiée
         </ion-col>
       </ion-list-header>
   
@@ -68,9 +71,11 @@
         {{ d.dateDemande }}
       </ion-col>
 
+<!--
       <ion-col size="1" class="ion-hide-lg-down">
       {{ d.nature }}
       </ion-col>
+      -->
       <ion-col size="1" class="ion-hide-lg-down">
         {{ d.category }} {{d.activation.fix.type}}
       </ion-col>
@@ -82,7 +87,7 @@
           {{ d.activation?.latitude }} , {{d.activation?.longitude}}
           </a>
       </ion-col>
-      <ion-col size="1" class="ion-hide-md-down">
+      <ion-col size="2" class="ion-hide-md-down">
         {{ d.activation?.prenom }} {{ d.activation?.nom }}
       </ion-col>
       <ion-col size="3" size-md="2" size-lg="1" class="ion-hide-md-down">
@@ -92,7 +97,7 @@
         {{ d.activation.fix.msisdn }}
 
       </ion-col>
-      <ion-col size="3" size-md="2" size-lg="1" (click)="callNumber(d.activation?.numContact)" >
+      <ion-col style="font-weight: bold;" size="4" (click)="callNumber(d.activation?.numContact)" >
         {{ d.activation?.numContact }}
       </ion-col>
       <ion-col size="2" size-md="2" size-lg="1" class="ion-hide-lg-down">
@@ -107,7 +112,7 @@
         <ng-container *ngIf="!d.datePlanif">
           <div class="center">
             <ion-col size="auto">
-              <ion-icon (click)="goToEvents(d.id,d.activation?.numContact)" name="calendar-clear-sharp"></ion-icon>
+              <ion-icon (click)="goToEvents(d.id,d.activation?.fix.contractNum)" name="calendar-clear-sharp"></ion-icon>
               </ion-col>
           </div>
 

@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar color="danger">
+<ion-header [translucent]="true" style="background-color: #E0E0E0;" class="ion-no-border">
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
@@ -16,30 +16,39 @@
 </ion-header>
 
 <ion-content >
-<ion-segment [(ngModel)]="calendar.mode">
-  <ion-segment-button value="month">Mois</ion-segment-button>
-  <ion-segment-button value="week">Semaine</ion-segment-button>
-  <ion-segment-button value="day">Jour</ion-segment-button>
+  <ion-card>
+    <ion-segment  [(ngModel)]="calendar.mode">
+      <ion-segment-button  value="month">Mois</ion-segment-button>
+      <ion-segment-button  value="week">Semaine</ion-segment-button>
+      <ion-segment-button  value="day">Jour</ion-segment-button>
+    
+      </ion-segment>
+  </ion-card>
 
-  </ion-segment>
+<ion-card>
+  <div>
+
 
   <ion-row  class="ion-justify-content-center">
-    <ion-col size="3">
+    <ion-col size="2">
       <ion-button fill="clear" (click)="calendarBack()">
         <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-col>
-    <ion-col size="6">
-      <h2 class="ion-text-center">
+    <ion-col size="7">
+      <h2 style="color: #000;" class="ion-text-center">
           {{viewTitle}}
       </h2>
     </ion-col>
-    <ion-col size="3">
+    <ion-col size="2">
       <ion-button fill="clear" (click)="calendarForward()">
         <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-col>
   </ion-row>
+</div>
+</ion-card>
+
 
 
 
@@ -68,7 +77,7 @@
 #modal trigger="inputmodal"
 [presentingElement]="presentingElement">
   <ng-template>
-    <ion-header class="ion-no-border">
+    <ion-header style="background-color: #f4f5f8;" class="ion-no-border">
       <ion-toolbar color="light">
         <ion-buttons slot="start">
           <ion-button (click)="modal.dismiss()"> Annuler </ion-button>
@@ -88,6 +97,7 @@
       <div class="group">
         <ion-input
         type="text"
+        value={{num}}
         [(ngModel)]="newEvent.title" placeholder="Titre"
         >
 
@@ -160,80 +170,3 @@
 </ng-template>
 
 </ion-content>
-
-<!--
-    <ion-button (click)="toggleBulkEdit()" expand="full">
-    Bulk Edit
-  </ion-button>
-  <ion-button (click)="bulkDelete()" expand="full" color="danger" *ngIf="bulkEdit">
-    Bulk Delete
-  </ion-button>
-
-  <ion-row class="header-row">
-    <ion-col size="2" *ngIf="bulkEdit">
-      Select
-    </ion-col>
-    <ion-col size="6" size-md="4" size-lg="2" tappable (click)="sortBy('email')">
-      Email
-
-    <ion-icon name="arrow-down" *ngIf="sortDirection == 1"></ion-icon>
-    <ion-icon name="arrow-up" *ngIf="sortDirection == 2"></ion-icon>
-    </ion-col>
-    <ion-col size="2" class="ion-hide-md-down">
-    login
-    </ion-col>
-    <ion-col size="2">
-    First Name
-    </ion-col>
-    <ion-col size="2">
-    Last Name
-    </ion-col>
-    <ion-col size="2" class="ion-hide-lg-down">
-    Phone
-    </ion-col>
-    <ion-col size="2" *ngIf="!bulkEdit">
-      Action
-    </ion-col>
-    </ion-row>
-
-
-    <ion-row *ngFor="let row of data.results; let i = index;" class="data-row">
-      <ion-col size="2" *ngIf="bulkEdit">
-
-      </ion-col>
-      <ion-col size="6" size-md="4" size-lg="2">
-        {{ row.email }}
-      </ion-col>
-
-      <ion-col size="2" class="ion-hide-md-down">
-      {{ row.login.username }}
-      </ion-col>
-      <ion-col size="2">
-        {{ row.name.first }}
-      </ion-col>
-      <ion-col size="2">
-        {{ row.name.last }}
-      </ion-col>
-      <ion-col size="2" class="ion-hide-lg-down">
-        {{ row.phone }}
-      </ion-col>
-      <ion-col size="2" *ngIf="!bulkEdit">
-
-        <ng-container *ngIf="row.registered.date">
-          {{ row.registered.date | date: 'dd-MM-yyyy' }}
-        </ng-container>
-        <ng-container *ngIf="!row.registered.date">
-          <ion-button 
-          size="small" 
-          (click)="changeDate(i)" 
-          color="light" 
-          fill="clear">
-        <ion-icon color="medium" name="calendar-sharp" slot="icon-only">
-        </ion-icon>
-        </ion-button>
-        </ng-container>
-
-
-      </ion-col>
-    </ion-row>
--->

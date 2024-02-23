@@ -1,6 +1,6 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" style="background-color: #E0E0E0;" class="ion-no-border">
   <ion-toolbar color="primary">
-    <ion-title>Fiche d'intervention : {{ itemDetails?.fullName }}</ion-title>
+    <ion-title>Fiche d'intervention : {{ itemDetails?.activation.prenom }}</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="cancel()">Retour</ion-button>
     </ion-buttons>
@@ -42,8 +42,10 @@
 
         <ion-row>
           <ion-col size="6">
-          <p><b>CGPS:</b></p>
-            <p>{{cgps}}</p>
+            <p><b>CGPS:</b></p>
+            <ion-text><a [href]="'https://www.google.com/maps/search/?api=1&query=' + cgps" target="_blank">
+              {{cgps}}
+            </a></ion-text>
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -153,6 +155,7 @@
           <ion-grid>
               <div  class="center-container">
                   <ion-button 
+                  style="font-weight: bold;"
                   [disabled]="!ficheInt.valid"
                   type="submit"
                   shape="round"

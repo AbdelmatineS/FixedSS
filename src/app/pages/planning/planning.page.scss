@@ -56,7 +56,24 @@
     justify-content: center;
     gap: 2px;
   }
-  
+  ion-header {
+    font-weight: bold;
+    ion-toolbar {
+      padding: 10px;
+      overflow: hidden;
+    }
+  }
+
+  ion-segment-button{
+    font-weight: bold;
+    
+  }
+
+  ion-item{
+    font-weight: bold;
+
+    --ion-background-color: #fff;
+  }
   .event-indicator{
     background: val(--ion_color-success);
     width: 5px;

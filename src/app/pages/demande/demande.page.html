@@ -36,7 +36,7 @@
         <ion-col size="1" class="ion-hide-lg-down">
           Abonnement
         </ion-col>
-        <ion-col size="1" class="ion-hide-md-down">
+        <ion-col size="2" class="ion-hide-md-down">
           CGPS        
         </ion-col>
         <ion-col size="2" class="ion-hide-md-down">
@@ -82,7 +82,7 @@
       <ion-col size="1" class="ion-hide-lg-down">
         {{ d.abonnement }} {{d.activation.fix.debit}}
       </ion-col>
-      <ion-col size="1" class="ion-hide-md-down">
+      <ion-col size="2" class="ion-hide-md-down">
         <a [href]="'https://www.google.com/maps/search/?api=1&query=' + d.activation?.latitude + ',' + d.activation?.longitude" target="_blank">
           {{ d.activation?.latitude }} , {{d.activation?.longitude}}
           </a>
@@ -97,7 +97,7 @@
         {{ d.activation.fix.msisdn }}
 
       </ion-col>
-      <ion-col style="font-weight: bold;" size="4" (click)="callNumber(d.activation?.numContact)" >
+      <ion-col style="font-weight: bold;" size="4" size-md="2" size-lg="1" (click)="callNumber(d.activation?.numContact)" >
         {{ d.activation?.numContact }}
       </ion-col>
       <ion-col size="2" size-md="2" size-lg="1" class="ion-hide-lg-down">

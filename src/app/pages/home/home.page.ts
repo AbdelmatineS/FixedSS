@@ -41,14 +41,14 @@ export class HomePage implements OnInit{
         {
     
           img: 'assets/images/reserv.png',
-          name: 'planning interventions',
+          name: 'Planning interventions',
           route: 'planning'
     
     
         },    {
     
           img: 'assets/images/reg.png',
-          name: 'Paramétres du compte',
+          name: 'Paramètres du compte',
           route: 'parametres'
     
     

@@ -42,7 +42,6 @@ ion-title{
     margin-top: 20%;
 
     .col_div{
-
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -74,8 +73,10 @@ ion-title{
 
 
 ion-header {
+
     ion-toolbar {
         --ion-background-color:#a5a4a4;
+
     }
 }
 
